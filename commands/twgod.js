@@ -8,7 +8,7 @@ export default async event => {
     const { data } = await axios.get('https://taiwangods.moi.gov.tw/Control/SearchDataViewer.ashx?t=landscape')
     const gods = data
       .map(god => {
-        god.distance = distance(god.LMapY, god.L_MapX, event.message.latitude, event.message.longitude, 'K')
+        god.distance = distance(god.L_MapY, god.L_MapX, event.message.latitude, event.message.longitude, 'K')
         return god
       })
       .sort((a, b) => {
@@ -22,6 +22,7 @@ export default async event => {
         t.footer.contents[0].action.uri = 'https://taiwangods.moi.gov.tw/html/landscape/1_0011.aspx?i=' + god.L_ID
         return t
       })
+
     const result = await event.reply({
       type: 'flex',
       altText: '宗教百景',
